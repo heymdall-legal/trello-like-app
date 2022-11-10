@@ -1,11 +1,16 @@
 import React from 'react';
 import styles from './app.module.css';
-import { useStateSelector } from '../../store';
+import { addColumn, useStateDispatch, useStateSelector } from '../../store';
 import { Column } from '../column/column';
 import { Button } from '../button/button';
 
 function App() {
+  const dispatch = useStateDispatch();
   const columns = useStateSelector((state) => state.columns);
+
+  const handleAddColumnClick = () => {
+    dispatch(addColumn());
+  };
 
   return (
     <div className={ styles.app }>
@@ -13,7 +18,7 @@ function App() {
         <Column key={ column.id } column={column} />
       ))}
 
-      <Button>+ Add column</Button>
+      <Button onClick={handleAddColumnClick}>+ Add column</Button>
     </div>
   );
 }

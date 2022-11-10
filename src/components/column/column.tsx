@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './column.module.css'
-import { ColumnType } from '../../store';
+import { addCard, ColumnType, deleteColumn, useStateDispatch } from '../../store';
 import { Card } from '../card/card';
 import { Button } from '../button/button';
 import { Editable } from '../editable/editable';
@@ -10,22 +10,31 @@ type Props = {
 }
 
 export const Column = (props: Props) => {
-  const [isEditing, setIsEditing] = React.useState(false);
+  const dispatch = useStateDispatch();
+  const [isEditing, setIsEditing] = React.useState(props.column.title === '');
 
   const handleEditClick = () => {
     setIsEditing((prevState) => !prevState);
-  }
+  };
 
   const handleTitleChange = (title: string) => {
     console.log('new title: ', title);
     setIsEditing(false);
-  }
+  };
+
+  const handleAddCardClick = () => {
+    dispatch(addCard(props.column.id));
+  };
+
+  const handleDeleteColumn = () => {
+    dispatch(deleteColumn(props.column.id));
+  };
 
   return (
     <div className={styles.column}>
       <div className={styles.buttons}>
         <Button title="Edit" icon="✏️" onClick={handleEditClick} />
-        <Button title="Delete" icon="🗑" />
+        <Button title="Delete" icon="🗑" onClick={handleDeleteColumn} />
       </div>
 
       <Editable text={props.column.title} onChange={handleTitleChange} isEditing={isEditing}>
@@ -34,10 +43,10 @@ export const Column = (props: Props) => {
 
 
       {props.column.cards.map((card) => (
-        <Card key={card.id} card={card} />
+        <Card key={card.id} card={card} columnId={props.column.id} />
       ))}
 
-      <Button>+ Add card</Button>
+      <Button onClick={ handleAddCardClick }>+ Add card</Button>
     </div>
   );
 }

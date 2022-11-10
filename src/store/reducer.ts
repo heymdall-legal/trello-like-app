@@ -1,9 +1,7 @@
-import { ApplicationState } from './types';
+import { ApplicationState, CardType, ColumnType } from './types';
+import type { AnyAction } from './actions';
+import { getRandomId } from '../utils';
 
-export type AnyAction = {
-  type: string;
-  payload: unknown;
-};
 
 export const initialState: ApplicationState = {
   columns: [
@@ -26,5 +24,65 @@ export const initialState: ApplicationState = {
 };
 
 export function reducer(state: ApplicationState, action: AnyAction) {
+  switch (action.type) {
+    case 'ADD_CARD': {
+      const { columnId } = action.payload;
+      const newCard: CardType = {
+        id: getRandomId(),
+        text: '',
+      };
+
+      return {
+        ...state,
+        columns: state.columns.map(column => {
+          if (column.id === columnId) {
+            return {
+              ...column,
+              cards: [...column.cards, newCard],
+            };
+          }
+
+          return column;
+        }),
+      }
+    }
+    case 'ADD_COLUMN': {
+      const newColumn: ColumnType = {
+        id: getRandomId(),
+        title: '',
+        cards: [],
+      };
+
+      return {
+        ...state,
+        columns: [...state.columns, newColumn],
+      };
+    }
+    case 'DELETE_CARD': {
+      const { columnId, cardId } = action.payload;
+
+      return {
+        ...state,
+        columns: state.columns.map(column => {
+          if (column.id === columnId) {
+            return {
+              ...column,
+              cards: column.cards.filter(card => card.id !== cardId),
+            };
+          }
+
+          return column;
+        }),
+      };
+    }
+    case 'DELETE_COLUMN': {
+      const { columnId } = action.payload;
+
+      return {
+        ...state,
+        columns: state.columns.filter(column => column.id !== columnId),
+      };
+    }
+  }
   return state;
 }

@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import { ApplicationState } from './types';
-import { AnyAction, initialState } from './reducer';
+import { initialState } from './reducer';
+import { AnyAction } from './actions';
 
 type ContextType = {
   state: ApplicationState;

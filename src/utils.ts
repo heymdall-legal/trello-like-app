@@ -23,3 +23,8 @@ export function useOnClickOutside(ref: React.RefObject<HTMLElement>, handler: ()
     };
   }, [ref, handler]);
 }
+
+// probably should use something like UUID generator instead of this
+export function getRandomId() {
+  return Math.random().toString(36).substr(2, 9);
+}
