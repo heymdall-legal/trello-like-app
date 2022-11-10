@@ -126,6 +126,34 @@ export function reducer(state: ApplicationState, action: AnyAction) {
         }),
       }
     }
+    case 'MOVE_CARD_TO_COLUMN': {
+      const { fromColumnId, toColumnId, cardId } = action.payload;
+
+      const cardToMove = state.columns
+        .find(column => column.id === fromColumnId)
+        ?.cards.find(card => card.id === cardId);
+
+      return {
+        ...state,
+        columns: state.columns.map(column => {
+          if (column.id === fromColumnId) {
+            return {
+              ...column,
+              cards: column.cards.filter(card => card.id !== cardId),
+            };
+          }
+
+          if (column.id === toColumnId) {
+            return {
+              ...column,
+              cards: [...column.cards, cardToMove!],
+            };
+          }
+
+          return column;
+        }),
+      };
+    }
   }
   return state;
 }

@@ -51,9 +51,19 @@ export function changeCardText(payload: { columnId: string, cardId: string, text
 
 export type ChangeCardTextAction = ReturnType<typeof changeCardText>;
 
+export function moveCardToColumn(payload: { fromColumnId: string, toColumnId: string, cardId: string }) {
+  return {
+    type: 'MOVE_CARD_TO_COLUMN' as const,
+    payload,
+  };
+}
+
+export type MoveCardToColumnAction = ReturnType<typeof moveCardToColumn>;
+
 export type AnyAction = AddCardAction
   | AddColumnAction
   | DeleteCardAction
   | DeleteColumnAction
   | ChangeColumnTitleAction
-  | ChangeCardTextAction;
+  | ChangeCardTextAction
+  | MoveCardToColumnAction;

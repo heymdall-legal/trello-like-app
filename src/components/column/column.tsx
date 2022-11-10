@@ -4,7 +4,7 @@ import {
   addCard,
   changeColumnTitle,
   ColumnType,
-  deleteColumn,
+  deleteColumn, moveCardToColumn,
   useStateDispatch
 } from '../../store';
 import { Card } from '../card/card';
@@ -23,7 +23,11 @@ export const Column = (props: Props) => {
   const [dropZoneRef, isOver] = useDrop({
     canDrop: (dragMeta) => dragMeta.columnId !== props.column.id,
     onDrop: (dragMeta) => {
-      console.log('drop', dragMeta);
+      dispatch(moveCardToColumn({
+        fromColumnId: dragMeta.columnId,
+        toColumnId: props.column.id,
+        cardId: dragMeta.cardId,
+      }));
     }
   });
 
