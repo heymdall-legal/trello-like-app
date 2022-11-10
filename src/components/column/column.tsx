@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './column.module.css'
-import { addCard, ColumnType, deleteColumn, useStateDispatch } from '../../store';
+import {
+  addCard,
+  changeColumnTitle,
+  ColumnType,
+  deleteColumn,
+  useStateDispatch
+} from '../../store';
 import { Card } from '../card/card';
 import { Button } from '../button/button';
 import { Editable } from '../editable/editable';
@@ -18,16 +24,16 @@ export const Column = (props: Props) => {
   };
 
   const handleTitleChange = (title: string) => {
-    console.log('new title: ', title);
+    dispatch(changeColumnTitle({ columnId: props.column.id, title: title }));
     setIsEditing(false);
   };
 
   const handleAddCardClick = () => {
-    dispatch(addCard(props.column.id));
+    dispatch(addCard({ columnId: props.column.id }));
   };
 
   const handleDeleteColumn = () => {
-    dispatch(deleteColumn(props.column.id));
+    dispatch(deleteColumn({ columnId: props.column.id }));
   };
 
   return (

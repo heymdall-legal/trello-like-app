@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardType, deleteCard, useStateDispatch } from '../../store';
+import { CardType, changeCardText, deleteCard, useStateDispatch } from '../../store';
 import styles from './card.module.css';
 import { Button } from '../button/button';
 import { Editable } from '../editable/editable';
@@ -18,12 +18,12 @@ export const Card = (props: Props) => {
   };
 
   const handleTitleChange = (title: string) => {
-    console.log('new title: ', title);
+    dispatch(changeCardText({ columnId: props.columnId, cardId: props.card.id, text: title }));
     setIsEditing(false);
   };
 
   const handleDeleteCard = () => {
-    dispatch(deleteCard(props.columnId, props.card.id));
+    dispatch(deleteCard({ columnId: props.columnId, cardId: props.card.id }));
   };
 
   return (

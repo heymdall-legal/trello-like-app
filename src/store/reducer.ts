@@ -83,6 +83,49 @@ export function reducer(state: ApplicationState, action: AnyAction) {
         columns: state.columns.filter(column => column.id !== columnId),
       };
     }
+    case 'CHANGE_COLUMN_TITLE': {
+      const { columnId, title } = action.payload;
+
+      return {
+        ...state,
+        columns: state.columns.map(column => {
+          if (column.id === columnId) {
+            return {
+              ...column,
+              title,
+            };
+          }
+
+          return column;
+        }),
+      }
+    }
+    case 'CHANGE_CARD_TEXT': {
+      const { columnId, cardId, text } = action.payload;
+
+      return {
+        ...state,
+        columns: state.columns.map(column => {
+          if (column.id === columnId) {
+            return {
+              ...column,
+              cards: column.cards.map(card => {
+                if (card.id === cardId) {
+                  return {
+                    ...card,
+                    text,
+                  };
+                }
+
+                return card;
+              }),
+            };
+          }
+
+          return column;
+        }),
+      }
+    }
   }
   return state;
 }
