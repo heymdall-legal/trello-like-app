@@ -28,6 +28,7 @@ export const Editable = (props: Props) => {
       case 'Escape': {
         event.preventDefault();
         event.currentTarget.blur();
+        props.onChange(props.text);
         setText(props.text);
       }
     }
