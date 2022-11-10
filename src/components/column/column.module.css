@@ -12,8 +12,9 @@
 }
 
 .header {
-  font-size: 22px;
-  line-height: 24px;
+  font-size: 18px;
+  line-height: 22px;
   margin-top: 4px;
   margin-bottom: 8px;
+  font-weight: bold;
 }

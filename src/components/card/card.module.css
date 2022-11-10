@@ -11,3 +11,10 @@
   justify-content: flex-end;
   padding-bottom: 4px;
 }
+
+.text {
+  font-size: 14px;
+  line-height: 16px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
