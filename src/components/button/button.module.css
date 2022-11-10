@@ -1,0 +1,33 @@
+.button {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #131313;
+}
+
+.medium {
+  font-size: 14px;
+  padding: 8px;
+  height: 36px;
+}
+
+.button + .button {
+  margin-left: 8px;
+}
+
+.icon.medium {
+  width: 36px;
+  height: 36px;
+}
+
+.small {
+  font-size: 12px;
+  padding: 4px;
+  height: 24px;
+}
+
+.icon.small {
+  width: 24px;
+  height: 24px;
+}

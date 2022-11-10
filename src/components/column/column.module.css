@@ -5,6 +5,12 @@
   padding: 8px;
 }
 
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 4px;
+}
+
 .header {
   font-size: 22px;
   line-height: 24px;
