@@ -1,9 +1,9 @@
 import { ApplicationState, CardType, ColumnType } from './types';
 import type { AnyAction } from './actions';
 import { getRandomId } from '../utils';
+import { loadState } from './localstorage';
 
-
-export const initialState: ApplicationState = {
+const FAKE_STATE: ApplicationState = {
   columns: [
     {
       id: '1',
@@ -22,6 +22,8 @@ export const initialState: ApplicationState = {
     }
   ],
 };
+
+export const initialState = loadState<ApplicationState>() || FAKE_STATE;
 
 export function reducer(state: ApplicationState, action: AnyAction) {
   switch (action.type) {

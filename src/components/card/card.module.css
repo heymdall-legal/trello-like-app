@@ -4,6 +4,7 @@
   border-radius: 6px;
   margin-bottom: 8px;
   padding: 4px;
+  cursor: move;
 }
 
 .buttons {
