@@ -34,6 +34,10 @@ export const Editable = (props: Props) => {
     }
   };
 
+  const handleBlur = () => {
+    props.onChange(text);
+  };
+
   useOnClickOutside(textareaRef, () => {
     props.onChange(text);
   });
@@ -66,6 +70,7 @@ export const Editable = (props: Props) => {
           ref={textareaRef}
           onChange={handleTextChange}
           onKeyDown={handleKeyDown}
+          onBlur={handleBlur}
         />
       )}
     </div>
