@@ -5,6 +5,11 @@
   padding: 8px;
 }
 
+.dragOver {
+  background: #ddd;
+  outline: dashed 2px #aaa;
+}
+
 .buttons {
   display: flex;
   justify-content: flex-end;

@@ -10,6 +10,8 @@ import {
 import { Card } from '../card/card';
 import { Button } from '../button/button';
 import { Editable } from '../editable/editable';
+import { useDrop } from '../draggable/use-drop';
+import { combineClasses } from '../../utils';
 
 type Props = {
   column: ColumnType;
@@ -18,6 +20,12 @@ type Props = {
 export const Column = (props: Props) => {
   const dispatch = useStateDispatch();
   const [isEditing, setIsEditing] = React.useState(props.column.title === '');
+  const [dropZoneRef, isOver] = useDrop({
+    canDrop: (dragMeta) => dragMeta.columnId !== props.column.id,
+    onDrop: (dragMeta) => {
+      console.log('drop', dragMeta);
+    }
+  });
 
   const handleEditClick = () => {
     setIsEditing((prevState) => !prevState);
@@ -37,7 +45,10 @@ export const Column = (props: Props) => {
   };
 
   return (
-    <div className={styles.column}>
+    <div
+      className={combineClasses(styles.column, isOver && styles.dragOver)}
+      ref={dropZoneRef}
+    >
       <div className={styles.buttons}>
         <Button title="Edit" icon="✏️" onClick={handleEditClick} />
         <Button title="Delete" icon="🗑" onClick={handleDeleteColumn} />

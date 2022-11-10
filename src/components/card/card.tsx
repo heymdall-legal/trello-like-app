@@ -3,6 +3,7 @@ import { CardType, changeCardText, deleteCard, useStateDispatch } from '../../st
 import styles from './card.module.css';
 import { Button } from '../button/button';
 import { Editable } from '../editable/editable';
+import { useDraggable } from '../draggable/use-draggable';
 
 type Props = {
   card: CardType;
@@ -10,6 +11,9 @@ type Props = {
 }
 
 export const Card = (props: Props) => {
+  const dragRef = useDraggable({
+    dragMeta: { cardId: props.card.id, columnId: props.columnId },
+  });
   const dispatch = useStateDispatch();
   const [isEditing, setIsEditing] = React.useState(props.card.text === '');
 
@@ -27,10 +31,10 @@ export const Card = (props: Props) => {
   };
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} ref={dragRef} draggable={true}>
       <div className={styles.buttons}>
-        <Button title="Edit" icon="✏️" size="small" onClick={handleEditClick} />
-        <Button title="Delete" icon="🗑" size="small" onClick={handleDeleteCard} />
+        <Button title="Edit" icon="✏️" size="small" onClick={handleEditClick}/>
+        <Button title="Delete" icon="🗑" size="small" onClick={handleDeleteCard}/>
       </div>
 
       <Editable text={props.card.text} onChange={handleTitleChange} isEditing={isEditing}>
