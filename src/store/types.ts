@@ -1,14 +1,14 @@
-export type Card = {
+export type CardType = {
   id: string;
   text: string;
 }
 
-export type Column = {
+export type ColumnType = {
   id: string;
   title: string;
-  cards: Card[];
+  cards: CardType[];
 }
 
 export type ApplicationState = {
-  columns: Column[];
+  columns: ColumnType[];
 }

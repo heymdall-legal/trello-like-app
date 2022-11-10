@@ -1,3 +1,3 @@
 export { useStateDispatch, useStateSelector } from './hooks';
 export { StateProvider } from './provider';
-export type { ApplicationState, Card, Column } from './types';
+export type { ApplicationState, CardType, ColumnType } from './types';
